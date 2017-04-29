@@ -1,0 +1,14 @@
+<h1>{{ paper.title }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'paper:new_note' paper.id %}" method="post">
+{% csrf_token %}
+{% for note in paper.note_set.all %}
+    <label for="note{{ forloop.counter }}">{{ note.text }}</label><br />
+{% endfor %}
+
+<input type="text" name="note" id="{{ paper.id }}" />
+<input type="submit" value="Note" />
+
+</form>

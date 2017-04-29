@@ -1,0 +1,20 @@
+pip3 install django-taggit
+pip3 install django-markdownx
+django-admin startproject Paper
+python3 manage.py runserver
+python3 manage.py startapp system
+python3 manage.py migrate
+python3 manage.py makemigrations system
+python3 manage.py sqlmigrate system 0001
+python3 manage.py shell
+
+python3 manage.py createsuperuser
+python3 manage.py runserver
+
+from system.models import Paper, Note
+Paper.objects.all()
+p = Paper(title="paper title", read_date=timezone.now())
+p = Paper.objects.get(pk=1)
+n = p.note_set.get(pk=1)
+p.note_set.create(text='The note')
+p.note_set.all()

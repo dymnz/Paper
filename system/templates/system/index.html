@@ -1,0 +1,9 @@
+{% if latest_paper_list %}
+    <ul>
+    {% for paper in latest_paper_list %}
+        <li><a href="{% url 'paper:paper' paper.id %}">{{ paper.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
