@@ -1,9 +1,12 @@
-{% if latest_paper_list %}
-    <ul>
-    {% for paper in latest_paper_list %}
-        <li><a href="{% url 'paper:paper' paper.id %}">{{ paper.title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+{% extends "system/base.html" %}
+{% block content %}
+	{% if latest_paper_list %}
+	    <ul>
+	    {% for paper in latest_paper_list %}
+	        <li><a href="{% url 'system:paper_detail' paper.id %}">{{ paper.title }}</a></li>
+	    {% endfor %}
+	    </ul>
+	{% else %}
+	    <p>No papers are available.</p>
+	{% endif %}
+{% endblock %}

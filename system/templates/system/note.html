@@ -1,0 +1,8 @@
+{% extends "system/base.html" %}
+{% block content %}
+    <article>
+    <h1>{{ note.title }}</h1>
+    <p>{{ note.formatted_markdown|safe }}</p>
+    <div>{{ note.add_date }}</div>
+    </article>
+{% endblock %}

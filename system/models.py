@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 
 from markdownx.models import MarkdownxField
+from markdownx.utils import markdownify
 from taggit.managers import TaggableManager
 
 class Paper(models.Model):
@@ -22,15 +23,21 @@ class Paper(models.Model):
 
 	def read_recently(self):
 		return self.read_date >= timezone.now() - datetime.timedelta(days=7)
+		
+	def formatted_markdown(self):
+		return markdownify(self.text)		
 
 class Note(models.Model):
 	paper = models.ForeignKey(Paper, on_delete=models.CASCADE)
-	add_date = models.DateField('date published', default=timezone.now)
+	add_date = models.DateField('date added', default=timezone.now)
 
 	text = MarkdownxField()
-	tags = TaggableManager()
+	tags = TaggableManager('')
 
 	def __str__(self):
 		return self.text
+		
+	def formatted_markdown(self):
+		return markdownify(self.text)
 
-    
+	

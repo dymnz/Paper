@@ -1,0 +1,31 @@
+body {
+    background-color: #efefef;
+    margin: auto;
+    width: 80%;
+}
+
+a {
+  color: #444444ff;
+  text-decoration: none; /* no underline */
+}
+
+
+.note {
+	background-color: #e0e0e0;	
+	border-radius: 7px;
+
+	padding: 10px 30px 10px 30px;
+	margin-bottom: 10px;
+}
+
+.paper_text {
+	background-color: #e0e0e0;
+	border-radius: 7px;
+
+	padding: 30px;
+	margin-bottom: 10px;
+}
+
+.paper_title {
+	text-align: center;
+}

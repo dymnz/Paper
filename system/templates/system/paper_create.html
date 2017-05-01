@@ -21,13 +21,15 @@
 	    </div>
 	{% endfor %}
 
-
-	<form action="{% url 'system:new_note' paper.id %}" method="post" id="note_form">
-	{% csrf_token %}
-	
-	<textarea autofocus required placeholder="Markdown supported..." rows="10" cols="60" name="note" form="note_form" id="{{ paper.id }}" ></textarea>
+	<form action="{% url 'system:new_note' paper.id %}" method="post" id="note_form">{% csrf_token %}
+	{{ form }}
 	<input type="submit" value="Note" />
-
 	</form>
+
+	<div class="markdown-body">
+		{{ form.media }}	
+	</div>
+	
+
 </div>
 {% endblock %}
