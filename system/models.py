@@ -11,12 +11,19 @@ class Paper(models.Model):
 	title = models.CharField(max_length=200)
 	author = models.CharField(max_length=200)
 	intro = models.CharField(max_length=500)
-	publish_date = models.DateField('date published', default=timezone.now)
+
+
+	YEAR_CHOICES = []
+	for r in range(1980, (datetime.datetime.now().year+1)):
+		YEAR_CHOICES.append((r,r))
+
+	publish_date = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+	#publish_date = models.DateField('date published', default=timezone.now)
+
 	read_date = models.DateField('date read', default=timezone.now)
 	points = models.IntegerField(default=0)
 
-	text = MarkdownxField()
-	tags = TaggableManager()
+	tags = TaggableManager(blank=True)
 
 	def __str__(self):
 		return self.title
@@ -32,7 +39,7 @@ class Note(models.Model):
 	add_date = models.DateField('date added', default=timezone.now)
 
 	text = MarkdownxField()
-	tags = TaggableManager('')
+	tags = TaggableManager(blank=True)
 
 	def __str__(self):
 		return self.text

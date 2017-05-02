@@ -3,7 +3,8 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'system/style.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'system/github-markdown.css' %}" />
+{% block style %}{% endblock %}
 <body>
     {% block content %}{% endblock %}
 </body>
-</html>
+</html>	

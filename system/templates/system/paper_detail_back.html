@@ -1,0 +1,42 @@
+{% extends "system/base.html" %}
+
+{% block style %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'system/paper_detail.css' %}" />
+{% endblock %}
+
+{% block content %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<h1 class="title">{{ paper.title }}</h1>
+
+<br/>
+
+<article class="note_list">
+
+	{% for note in paper.note_set.all %}
+		<div class="note">
+	    {{ note.formatted_markdown|safe }}
+		</div>
+	    <div class="tag_list">
+		    {% for tag in note.tags.all %}
+	            <a class="tag"> {{ tag.name }} </a>
+	        {% endfor %}
+		    
+	    </div>
+	{% endfor %}
+</article>
+
+<br/>
+
+<form action="{% url 'system:paper_detail' paper.id %}" method="post" id="note_form">{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Note" />
+</form>
+
+<div class="markdown-body">
+	{{ form.media }}
+
+</div>
+
+{% endblock %}

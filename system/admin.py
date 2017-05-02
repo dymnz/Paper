@@ -6,12 +6,12 @@ from .models import Paper, Note
 class NoteInline(admin.StackedInline):
     model = Note
     extra = 1
-    fields = ['text']
+    fields = ['text', 'tags']
 
 class PaperAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['title', 'publish_date']}),
-        ('Custom', {'fields': ['read_date', 'text']}),
+        ('Custom', {'fields': ['read_date']}),
     ]
     inlines = [NoteInline]
 

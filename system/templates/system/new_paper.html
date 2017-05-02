@@ -1,0 +1,30 @@
+{% extends "system/base.html" %}
+
+{% block style %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'system/style2.css' %}" />
+{% endblock %}
+
+{% block content %}
+	
+	{% if latest_paper_list %}
+	    <ul>
+	    {% for paper in latest_paper_list %}
+	        <li><a href="{% url 'system:paper_detail' paper.id %}">{{ paper.title }}</a></li>
+	    {% endfor %}
+	    </ul>
+	{% else %}
+	    <p>No papers are available.</p>
+	{% endif %}
+
+
+	<form action="{% url 'system:new_paper' %}" method="post" id="paper_form">{% csrf_token %}
+	{{ form }}
+	<input type="submit" value="Note" />
+	</form>
+
+	<div class="markdown-body">
+		{{ form.media }}	
+	</div>
+
+{% endblock %}

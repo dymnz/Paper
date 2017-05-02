@@ -1,0 +1,27 @@
+.title {
+	text-align: center;
+}
+
+.note {
+	background-color: #e0e0e0;	
+	border-radius: 7px;
+
+	padding: 10px 30px 10px 30px;
+	margin: 5px 0px 10px 0px;
+}
+
+.tag_list {
+	background-color: #efefef;
+	text-align: left;
+	margin: 30px 3px 10px 0px;
+}
+
+.tag {
+	color: #24292e;
+	background-color: #e0e0ff;
+	padding: 5px;
+	border-radius: 7px;
+	margin: 0px 3px 0px 0px;
+}
+
+
