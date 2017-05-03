@@ -10,6 +10,10 @@
 
 <h1 class="title">{{ paper.title }}</h1>
 
+<article class="note">
+	{{ paper.formatted_markdown|safe }}
+</article>
+
 <article class="note-list">
 
 	{% for note_list in ordered_note_list %}

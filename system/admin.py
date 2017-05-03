@@ -12,7 +12,7 @@ class NoteInline(admin.StackedInline):
 class PaperAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['title', 'publish_date']}),
-        ('Custom', {'fields': ['read_date']}),
+        ('Custom', {'fields': ['read_date', 'text']}),
     ]
     inlines = [NoteInline]
 

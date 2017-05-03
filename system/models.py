@@ -11,7 +11,7 @@ class Paper(models.Model):
 	title = models.CharField(max_length=200)
 	author = models.CharField(max_length=200)
 	intro = models.CharField(max_length=500)
-
+	text = MarkdownxField()
 
 	YEAR_CHOICES = []
 	for r in range(1980, (datetime.datetime.now().year+1)):
