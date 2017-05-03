@@ -6,14 +6,8 @@
 	background-color: #e0e0e0;	
 	border-radius: 7px;
 
-	padding: 10px 30px 10px 30px;
+	padding: 5px 10px 5px 20px;
 	margin: 5px 0px 10px 0px;
-}
-
-.tag_list {
-	background-color: #efefef;
-	text-align: left;
-	margin: 30px 3px 10px 0px;
 }
 
 .tag {
@@ -24,4 +18,31 @@
 	margin: 0px 3px 0px 0px;
 }
 
+.tag-list {
+	background-color: #efefef;
+	text-align: left;
+	margin: 30px 3px 10px 0px;
+}
 
+.note-form {
+	display: block;
+}
+
+.tag-field {
+	margin: 0px 0px 10px 3px;
+	width: auto;
+	font-size: 16px;
+	-webkit-appearance: none;
+	text-align-last: center;
+	background-color: #e0e0ff;
+	padding: 1px 3px 1px 3px;
+}
+
+
+.markdownx-editor {
+	display: block;
+	width: 100%;
+	border-radius: 7px;
+	margin: 0px 0px 0px 3px;
+	padding-right: 0;
+}

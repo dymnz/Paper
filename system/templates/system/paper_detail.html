@@ -10,9 +10,7 @@
 
 <h1 class="title">{{ paper.title }}</h1>
 
-<br/>
-
-<article class="note_list">
+<article class="note-list">
 
 	{% for note_list in ordered_note_list %}
 	    <!---<div class="tag_list">
@@ -20,25 +18,30 @@
 	            <a class="tag"> {{ tag.name }} </a>
 	        {% endfor %}		    
 	    </div> -->
-	    <div class="tag_list"><a class="tag"> {{ note_list.0.tags.all.0.name }} </a></div>
+	    <div class="tag-list"><a class="tag"> {{ note_list.0.tags.all.0.name }} </a></div>
 		{% for note in note_list %}
 			<div class="note">
 		    {{ note.formatted_markdown|safe }}
 			</div>
 		{% endfor %}		    
 	{% endfor %}
+
+	<br>
+
+	<form action="{% url 'system:paper_detail' paper.id %}" method="post" class="note-form">{% csrf_token %}
+	{{ form }}
+	<input type="submit" value="Note" />
+	</form>
+
+	<div class="markdown-body">
+		{{ form.media }}
+	</div>
+
+
 </article>
 
 <br/>
 
-<form action="{% url 'system:paper_detail' paper.id %}" method="post" id="note_form">{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Note" />
-</form>
 
-<div class="markdown-body">
-	{{ form.media }}
-
-</div>
 
 {% endblock %}

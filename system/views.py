@@ -22,9 +22,31 @@ class NoteListView(generic.ListView):
 	template_name = 'system/note.html'
 	context_object_name = 'latest_note_list'
 
+	# Collect every tag
+	tag_list = []	
+	for note in Note.objects.all():
+		for tag in note.tags.names():
+			tag_list.append(tag)
+	tag_list = sorted(list(set(tag_list)))
+		
+	# Reorder the notes
+	remaining_note_list = Note.objects.all()
+	ordered_note_list = []
+	for tag in tag_list:
+		if len(remaining_note_list) == 0:
+			break
+		tag_note_list = list(remaining_note_list.filter(tags__name__in=[tag]))
+		ordered_note_list.append(tag_note_list)
+		# TODO: Remove assigned notes from remaining list #
+		#remaining_note_list = remaining_note_list - tag_note_list
+
+
+
+
 	def get_queryset(self):
 		"""Return the last five published questions."""
-		return Note.objects.order_by('-add_date')[:50]
+		#return Note.objects.order_by('-add_date')[:50]
+		return self.ordered_note_list
 
 
 class NoteDetailView(generic.DetailView):
@@ -48,7 +70,8 @@ def PaperDetailView(request, paper_id):
 		if form.is_valid():
 			note = Note(paper=paper, text=form.cleaned_data['text'])
 			note.save()
-			note.tags.add(*(form.cleaned_data['tags']))
+			
+			note.tags.add(form.cleaned_data['tag_dropdown'])
 
 			# Reorganize the tags of a note
 			for note in paper.note_set.all():
@@ -64,7 +87,7 @@ def PaperDetailView(request, paper_id):
 		form = NoteForm()
 
 		# Collect every tag
-		tag_list = []		
+		tag_list = []	
 		for note in paper.note_set.all():
 			for tag in note.tags.names():
 				tag_list.append(tag)
@@ -78,6 +101,7 @@ def PaperDetailView(request, paper_id):
 				break
 			tag_note_list = list(remaining_note_list.filter(tags__name__in=[tag]))
 			ordered_note_list.append(tag_note_list)
+			# TODO: Remove assigned notes from remaining list #
 			#remaining_note_list = remaining_note_list - tag_note_list
 			
 	return render(request, 'system/paper_detail.html', {'paper': paper, 'ordered_note_list': ordered_note_list, 'form': form})

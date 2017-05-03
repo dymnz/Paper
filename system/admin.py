@@ -8,6 +8,7 @@ class NoteInline(admin.StackedInline):
     extra = 1
     fields = ['text', 'tags']
 
+
 class PaperAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['title', 'publish_date']}),

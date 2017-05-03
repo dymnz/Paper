@@ -1,8 +1,22 @@
 {% extends "system/base.html" %}
+
+{% block style %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'system/paper_detail.css' %}" />
+{% endblock %}
+
 {% block content %}
-    <article>
-    <h1>{{ note.title }}</h1>
-    <p>{{ note.formatted_markdown|safe }}</p>
-    <div>{{ note.add_date }}</div>
-    </article>
+	{% if latest_note_list %}
+	    {% for note_list in latest_note_list %}
+	    
+	    <div class="tag-list"><a class="tag"> {{ note_list.0.tags.all.0.name }} </a></div>
+			{% for note in note_list %}
+				<div class="note">
+			    {{ note.formatted_markdown|safe }}
+				</div>
+			{% endfor %}		    
+		{% endfor %}
+	{% else %}
+	    <p>No notes are available.</p>
+	{% endif %}
 {% endblock %}
