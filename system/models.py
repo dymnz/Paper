@@ -11,14 +11,12 @@ class Paper(models.Model):
 	title = models.CharField(max_length=200)
 	author = models.CharField(max_length=200)
 	intro = models.CharField(max_length=500)
-	text = MarkdownxField()
-
+	 
 	YEAR_CHOICES = []
 	for r in range(1980, (datetime.datetime.now().year+1)):
 		YEAR_CHOICES.append((r,r))
 
 	publish_date = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
-	#publish_date = models.DateField('date published', default=timezone.now)
 
 	read_date = models.DateField('date read', default=timezone.now)
 	points = models.IntegerField(default=0)
@@ -33,6 +31,17 @@ class Paper(models.Model):
 		
 	def formatted_markdown(self):
 		return markdownify(self.text)		
+
+
+
+class Text(models.Model):
+	paper = models.ForeignKey(Paper, on_delete=models.CASCADE)
+	text = MarkdownxField()
+
+	def formatted_markdown(self):
+		return markdownify(self.text)
+
+
 
 class Note(models.Model):
 	paper = models.ForeignKey(Paper, on_delete=models.CASCADE)

@@ -10,8 +10,14 @@
 
 <h1 class="title">{{ paper.title }}</h1>
 
-<article class="note">
-	{{ paper.formatted_markdown|safe }}
+<article class="note-list">
+
+	{% for text in text_list %}
+		<div class="note">
+	    {{ text.formatted_markdown|safe }}
+		</div>
+	{% endfor %}		    
+
 </article>
 
 <article class="note-list">

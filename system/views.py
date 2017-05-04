@@ -103,8 +103,11 @@ def PaperDetailView(request, paper_id):
 			ordered_note_list.append(tag_note_list)
 			# TODO: Remove assigned notes from remaining list #
 			#remaining_note_list = remaining_note_list - tag_note_list
+
+		# List of text
+		text_list = paper.text_set.all()
 			
-	return render(request, 'system/paper_detail.html', {'paper': paper, 'ordered_note_list': ordered_note_list, 'form': form})
+	return render(request, 'system/paper_detail.html', {'paper': paper, 'ordered_note_list': ordered_note_list, 'text_list': text_list,  'form': form})
 
 
 
